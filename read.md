@@ -24,9 +24,9 @@ def deprecated(func):
 
 4. Оптимизация memorized
 Декоратор не работает корректно для функций с kwargs аргументами.
-
+  
 Пример:
-
+  
 def memorized(func):
   import functools
   cache = {}
@@ -43,18 +43,19 @@ def memorized(func):
 @memorized
 def fun(a, b, **kwargs):
   pass
-
+  
 
 if __name__ == "__main__":
   fun(1, 2, {"a":3})
-Вывод:
+Вывод:  
 
 Traceback (most recent call last):
   File "main.py", line 76, in <module>
     fun(1, 2, {"a":3})
   File "main.py", line 60, in inner
     if key not in cache:
-TypeError: unhashable type: 'dict'
+TypeError: unhashable type: 'dict'  
+    
 Варианты оптимизации: В текущем варианте ключем является список аргументов функции. Как вариант, можно записывать сумму аргументов, но надо учитывать, что от перестановки мест сумма не меняется.
 Может возникнуть сложность при складывании некоторых аргументов
 Для нормальной работы декоратора необходимо запоминать как значения аргументов, так и их последовательность. Отсюда следует что лучшим вариантом является сохранение набора входных аргументов функции в виде массива tuple.
