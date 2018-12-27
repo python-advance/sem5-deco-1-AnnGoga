@@ -27,34 +27,35 @@ def deprecated(func):
   
 Пример:
   
-def memorized(func):  
+    def memorized(func):  
+
     import functools  
-     cache = {}  
-     @functools.wraps(func)  
-     def inner(*args, **kwargs):  
+      cache = {}  
+      @functools.wraps(func)  
+      def inner(*args, **kwargs):  
       # key = (args, kwargs)  
       key = args + tuple(sorted(kwargs.items()))  
-     if key not in cache:  
+      if key not in cache:  
        cache[key] = func(*args, **kwargs)  
           return cache[key]  
       return inner  
 
 
-@memorized  
-def fun(a, b, **kwargs):  
-  pass  
+        @memorized  
+        def fun(a, b, **kwargs):  
+         pass  
   
 
-if __name__ == "__main__":  
-  fun(1, 2, {"a":3})  
+        if __name__ == "__main__":  
+        fun(1, 2, {"a":3})  
 Вывод:  
 
-Traceback (most recent call last):
-  File "main.py", line 76, in <module>
-    fun(1, 2, {"a":3})
-  File "main.py", line 60, in inner
-    if key not in cache:
-TypeError: unhashable type: 'dict'  
+        Traceback (most recent call last):
+         File "main.py", line 76, in <module>
+             fun(1, 2, {"a":3})
+        File "main.py", line 60, in inner
+         if key not in cache:
+        TypeError: unhashable type: 'dict'  
     
 Варианты оптимизации: В текущем варианте ключем является список аргументов функции. Как вариант, можно записывать сумму аргументов, но надо учитывать, что от перестановки мест сумма не меняется.
 Может возникнуть сложность при складывании некоторых аргументов
