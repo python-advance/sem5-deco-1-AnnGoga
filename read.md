@@ -1,7 +1,7 @@
 2. Анализ работы декоратора deprecated
 Код функции:
 
-def deprecated(func):
+def deprecated(func):  
     
     import warnings
     
@@ -27,26 +27,26 @@ def deprecated(func):
   
 Пример:
   
-def memorized(func):
-  import functools
-  cache = {}
-  @functools.wraps(func)
-  def inner(*args, **kwargs):
-    # key = (args, kwargs)
-    key = args + tuple(sorted(kwargs.items()))
-    if key not in cache:
-      cache[key] = func(*args, **kwargs)
-      return cache[key]
-  return inner
+def memorized(func):  
+    import functools  
+     cache = {}  
+     @functools.wraps(func)  
+     def inner(*args, **kwargs):  
+      # key = (args, kwargs)  
+      key = args + tuple(sorted(kwargs.items()))  
+     if key not in cache:  
+       cache[key] = func(*args, **kwargs)  
+          return cache[key]  
+      return inner  
 
 
-@memorized
-def fun(a, b, **kwargs):
-  pass
+@memorized  
+def fun(a, b, **kwargs):  
+  pass  
   
 
-if __name__ == "__main__":
-  fun(1, 2, {"a":3})
+if __name__ == "__main__":  
+  fun(1, 2, {"a":3})  
 Вывод:  
 
 Traceback (most recent call last):
